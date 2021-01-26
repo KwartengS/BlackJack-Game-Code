@@ -1,0 +1,104 @@
+import random
+from replit import clear 
+from art import logo 
+
+card_list = [1,2,3,4,5,6,7,8,9,10,10,10,10]
+player_list = []
+computer_list = []
+player_total = 0
+computer_total = 0
+
+def start():
+  print(logo)
+  player_choice = input("Do you want to play Blackjack? Type 'y' for yes and 'n' for no. ")
+  return player_choice
+
+if start() == 'y':
+  player_list.append(random.choice(card_list))
+  player_list.append(random.choice(card_list))
+  print(player_list)
+  for item in player_list:
+    player_total += item 
+  computer_list.append(random.choice(card_list))
+  for item in computer_list:
+    computer_total += item
+  print(f"""
+  Your chosen cards are: {player_list}. Your total is: {player_total}. 
+  The computer's card is: {computer_list}. Computer's total is: {computer_total}
+  """)
+else:
+  clear()
+  start()
+
+to_go_ahead = input("Do you want to pick another card? Type 'y' for yes and 'n' for no. ")
+
+while to_go_ahead == 'y' and player_total < 21:
+  q = random.choice(card_list)
+  player_total += q 
+  player_list.append(q)
+  print(f"""
+  Your chosen cards are: {player_list}. Your total is: {player_total}. 
+  The computer's card are: {computer_list}. Computer's total is: {computer_total}
+  """)
+  if player_total < 21:
+    to_go_ahead = input("Do you want to pick another card? Type 'y' for yes and 'n' for no. ")
+  else:
+    d = random.choice(card_list)
+    computer_total += d
+    computer_list.append(d)
+    while computer_total < 17: 
+      d = random.choice(card_list)
+      computer_total += d
+      computer_list.append(d)
+    if computer_total > 17:
+      if player_total > computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}. 
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        Unfortunately, you lose.
+        """)
+        start()
+      elif player_total == computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}. 
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        It's a draw.
+        """)
+        start()
+      elif player_total < computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}. 
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        Well done, you win.
+        """)
+        start()
+if to_go_ahead == 'n' or player_total > 21:
+  d = random.choice(card_list)
+  computer_total += d
+  computer_list.append(d)
+  while computer_total < 17: 
+    d = random.choice(card_list)
+    computer_total += d
+    computer_list.append(d)
+    if computer_total > 17:
+      if player_total > computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}. 
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        Unfortunately, you lose.
+        """)
+        start()
+      elif player_total == computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}. 
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        It's a draw.
+        """)
+        start()
+      elif player_total < computer_total:
+        print(f"""
+        Your chosen cards are: {player_list}. Your total is: {player_total}.
+        The computer's card are: {computer_list}. Computer's total is: {computer_total}.
+        Well done, you win.
+        """)
+        start()
